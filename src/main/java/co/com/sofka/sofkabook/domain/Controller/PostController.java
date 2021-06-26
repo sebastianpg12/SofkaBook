@@ -41,11 +41,17 @@ public class PostController {
                 new Fecha(fecha));
 
         CreatePostUseCase.Response postCreated = executeUseCase(command);
-        return (postCreated.getResponse().getIdUsuario().value()+
-                " "+postCreated.getResponse().getIdTitulo().value()+
-                " "+postCreated.getResponse().getDescripcion().value()+
-                " "+postCreated.getResponse().getTitulo().value())
-                ;
+        String string = "{"
+                + "\"PostId\":" + "\""+postCreated.getResponse().identity()+"\""+ ","
+                + "\"IdUsuario\":" + "\""+postCreated.getResponse().getIdUsuario()+"\""+ ","
+                + "\"IdTitulo\":" + "\""+postCreated.getResponse().getIdTitulo()+"\""+ ","
+                + "\"Descripcion\":" + "\""+postCreated.getResponse().getDescripcion()+"\""+ ","
+                + "\"Titulo\":" + "\""+postCreated.getResponse().getTitulo()+"\""+ ","
+                + "\"Comentarios\":" + "\""+postCreated.getResponse().getComentario()+"\""+ ","
+                + "\"Fecha\":" + "\""+postCreated.getResponse().getFecha()
+                +"}";
+
+        return string;
     }
 
     @PostMapping(value = "apiComment/{IdComentario}/{Comentario}/{Fecha}/{PostId}/{IdUsuario}/{Name}")
