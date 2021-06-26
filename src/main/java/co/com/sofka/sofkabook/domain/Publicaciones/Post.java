@@ -3,14 +3,14 @@ package co.com.sofka.sofkabook.domain.Publicaciones;
 
 import co.com.sofka.domain.generic.AggregateRoot;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
-
-
-@Document(collation = "Post")
+@Document(collection  = "post")
 public class Post extends AggregateRoot<PostId> {
+
+    @Id
+    protected String idPro;
 
     protected IdUsuario idUsuario;
     protected IdTitulo idTitulo;
@@ -24,6 +24,7 @@ public class Post extends AggregateRoot<PostId> {
                 Descripcion descripcion,Titulo titulo, Comentario comentario, Fecha fecha ){
         super(entityId);
         this.idUsuario = idUsuario;
+        this.idPro = entityId.value();
         this.idTitulo = idTitulo;
         this.fecha = fecha;
         this.descripcion = descripcion;
@@ -31,11 +32,12 @@ public class Post extends AggregateRoot<PostId> {
         this.comentario = comentario;
     }
 
-    public Post(PostId entityId, Comentario comentario) {
-        super(entityId);
-        this.idUsuario = idUsuario;
-        this.idTitulo = idTitulo;
-        this.comentario = comentario;
+    public void setIdPro(String idPro) {
+        this.idPro = idPro;
+    }
+
+    public String getIdPro() {
+        return idPro;
     }
 
     public IdUsuario getIdUsuario() {

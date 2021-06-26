@@ -5,9 +5,11 @@ import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.sofkabook.domain.Publicaciones.Comentarios;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateComment;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreatePost;
+import co.com.sofka.sofkabook.domain.Publicaciones.repository.PostData;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 import co.com.sofka.sofkabook.useCases.CreateCommentUseCase;
 import co.com.sofka.sofkabook.useCases.CreatePostUseCase;
+import co.com.sofka.sofkabook.useCases.TransformPostUseCase;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +25,10 @@ public class PostController {
     @Autowired
     private CreateCommentUseCase createCommentUseCase;
 
-    @PostMapping(value = "api/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Comentarios}/{Fecha}")
+    @Autowired
+    private TransformPostUseCase transformPostUseCase;
+
+    @PostMapping(value = "api/guardar/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Comentarios}/{Fecha}")
     public String save(@PathVariable("PostId")String postId,
                        @PathVariable("IdUsuario")String idUsuario,
                        @PathVariable("IdTitulo")String idTitulo,
@@ -90,6 +95,23 @@ public class PostController {
                 .orElseThrow();
         var CommentCreated = events;
         return CommentCreated;
+    }
+
+    ///////////////////////////
+
+
+    @GetMapping(value = "api/findPosts")
+    public Iterable<PostData> listar(){
+        return (transformPostUseCase.listar());
+    }
+
+    @GetMapping(value = "api/findPerson/{id}")
+    public PostData listarId(@PathVariable("id") String id){
+        return (transformPostUseCase.listarId(id));
+    }
+    @DeleteMapping(value = "api/delete/{id}")
+    public String delete(@PathVariable("id") String id){
+        return (transformPostUseCase.delete(id));
     }
 
 }

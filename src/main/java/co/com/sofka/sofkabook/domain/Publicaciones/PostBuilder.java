@@ -3,6 +3,7 @@ package co.com.sofka.sofkabook.domain.Publicaciones;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 
 public final class PostBuilder {
+    protected String idPro;
     protected IdUsuario idUsuario;
     protected IdTitulo idTitulo;
     protected Fecha fecha;
@@ -15,6 +16,11 @@ public final class PostBuilder {
 
     public static PostBuilder aPost() {
         return new PostBuilder();
+    }
+
+    public PostBuilder withIdPro(String idPro) {
+        this.idPro = idPro;
+        return this;
     }
 
     public PostBuilder withIdUsuario(IdUsuario idUsuario) {
@@ -48,6 +54,8 @@ public final class PostBuilder {
     }
 
     public Post build() {
-        return new Post(null, idUsuario, idTitulo, descripcion, titulo, comentario, fecha);
+        Post post = new Post(null, idUsuario, idTitulo, descripcion, titulo, comentario, fecha);
+        post.setIdPro(idPro);
+        return post;
     }
 }
