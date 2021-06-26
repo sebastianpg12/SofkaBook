@@ -1,26 +1,25 @@
-package co.com.sofka.sofkabook.domain.Publicaciones.commands;
+package co.com.sofka.sofkabook.domain.Publicaciones.events;
 
-import co.com.sofka.domain.generic.Command;
+import co.com.sofka.domain.generic.DomainEvent;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 
-public class UpdatePost implements Command {
+public class PostUpdated extends DomainEvent {
     private final PostId postId;
     private final IdUsuario idUsuario;
     private final IdTitulo idTitulo;
+    private final Fecha fecha;
     private final Descripcion descripcion;
     private final Titulo titulo;
-    private final Comentario comentario;
-    private final Fecha fecha;
 
-    public UpdatePost(PostId postId, IdUsuario idUsuario, IdTitulo idTitulo,
-                      Descripcion descripcion, Titulo titulo, Comentario comentario,  Fecha fecha) {
+
+    public PostUpdated(PostId postId, IdUsuario idUsuario, IdTitulo idTitulo, Fecha fecha, Descripcion descripcion, Titulo titulo) {
+        super("Posts.post.created");
         this.postId = postId;
         this.idUsuario = idUsuario;
         this.idTitulo = idTitulo;
+        this.fecha = fecha;
         this.descripcion = descripcion;
         this.titulo = titulo;
-        this.comentario = comentario;
-        this.fecha = fecha;
     }
 
     public PostId PostId() {
@@ -35,19 +34,15 @@ public class UpdatePost implements Command {
         return idTitulo;
     }
 
+    public Fecha Fecha() {
+        return fecha;
+    }
+
     public Descripcion Descripcion() {
         return descripcion;
     }
 
     public Titulo Titulo() {
         return titulo;
-    }
-
-    public Comentario Comentario() {
-        return comentario;
-    }
-
-    public Fecha Fecha() {
-        return fecha;
     }
 }
