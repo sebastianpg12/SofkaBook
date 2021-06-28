@@ -17,11 +17,13 @@ public class Post extends AggregateRoot<PostId> {
     protected Fecha fecha;
     protected Descripcion descripcion;
     protected Titulo titulo;
+    protected Name name;
+   
 
 
 
     public Post(PostId entityId, IdUsuario idUsuario, IdTitulo idTitulo,
-                Descripcion descripcion,Titulo titulo, Fecha fecha ){
+                Descripcion descripcion,Titulo titulo, Fecha fecha, Name name ){
         super(entityId);
         this.idUsuario = idUsuario;
         this.idPro = entityId.value();
@@ -29,6 +31,7 @@ public class Post extends AggregateRoot<PostId> {
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.titulo = titulo;
+        this.name = name;
 
     }
 
@@ -58,5 +61,7 @@ public class Post extends AggregateRoot<PostId> {
 
     public Titulo getTitulo() { return titulo; }
 
-
+    public Name getName() {
+        return name;
+    }
 }

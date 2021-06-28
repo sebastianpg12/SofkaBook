@@ -10,9 +10,11 @@ public class PostCreated extends DomainEvent {
     private final Fecha fecha;
     private final Descripcion descripcion;
     private final Titulo titulo;
+    private final Name name;
 
 
-    public PostCreated(PostId postId, IdUsuario idUsuario, IdTitulo idTitulo, Fecha fecha, Descripcion descripcion, Titulo titulo) {
+    public PostCreated(PostId postId, IdUsuario idUsuario, IdTitulo idTitulo, Fecha fecha,
+                       Descripcion descripcion, Titulo titulo, Name name) {
         super("Posts.post.created");
         this.postId = postId;
         this.idUsuario = idUsuario;
@@ -20,6 +22,7 @@ public class PostCreated extends DomainEvent {
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.titulo = titulo;
+        this.name = name;
     }
 
     public PostId PostId() {
@@ -44,5 +47,9 @@ public class PostCreated extends DomainEvent {
 
     public Titulo Titulo() {
         return titulo;
+    }
+
+    public Name getName() {
+        return name;
     }
 }

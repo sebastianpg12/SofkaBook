@@ -17,7 +17,7 @@ public class TransformPostUseCase {
 
     public PostData transform(Post post) {
         PostData postData = new PostData(post.getIdPro(), post.getIdUsuario().value(), post.getIdTitulo().value(),
-                post.getDescripcion().value(),post.getTitulo().value(),post.getFecha().value());
+                post.getDescripcion().value(),post.getTitulo().value(),post.getFecha().value(),post.getName().value());
         return postData ;
     }
 

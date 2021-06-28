@@ -20,14 +20,14 @@ public class CreatePostUseCase extends UseCase<RequestCommand<CreatePost>, Creat
     public void executeUseCase(RequestCommand<CreatePost> createPostRequestCommand) {
         var command = createPostRequestCommand.getCommand();
         var post = new Post(command.PostId(), command.IdUsuario(), command.IdTitulo(),
-                command.Descripcion(), command.Titulo(), command.Fecha());
+                command.Descripcion(), command.Titulo(), command.Fecha(), command.Name());
         data.save(transform(post));
         emit().onResponse(new Response(post));
     }
 
     public PostData transform(Post post) {
         PostData postData = new PostData(post.getIdPro(), post.getIdUsuario().value(), post.getIdTitulo().value(),
-                post.getDescripcion().value(),post.getTitulo().value(),post.getFecha().value());
+                post.getDescripcion().value(),post.getTitulo().value(),post.getFecha().value(),post.getName().value());
         return postData ;
     }
 

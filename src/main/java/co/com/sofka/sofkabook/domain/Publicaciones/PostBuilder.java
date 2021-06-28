@@ -9,6 +9,7 @@ public final class PostBuilder {
     protected Fecha fecha;
     protected Descripcion descripcion;
     protected Titulo titulo;
+    protected Name name;
 
     private PostBuilder() {
     }
@@ -47,8 +48,13 @@ public final class PostBuilder {
         return this;
     }
 
+    public PostBuilder withName(Name name) {
+        this.name = name;
+        return this;
+    }
+
     public Post build() {
-        Post post = new Post(null, idUsuario, idTitulo, descripcion, titulo, fecha);
+        Post post = new Post(null, idUsuario, idTitulo, descripcion, titulo, fecha, name);
         post.setIdPro(idPro);
         return post;
     }

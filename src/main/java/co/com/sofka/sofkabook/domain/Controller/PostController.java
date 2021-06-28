@@ -36,20 +36,22 @@ public class PostController {
 
 
     //actualizar
-    @PutMapping(value = "api/actualizar/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Fecha}")
+    @PutMapping(value = "api/actualizar/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Fecha}/{Name}")
     public String actualizar(@PathVariable("PostId")String postId,
                        @PathVariable("IdUsuario")String idUsuario,
                        @PathVariable("IdTitulo")String idTitulo,
                        @PathVariable("Descripcion")String descripcion,
                        @PathVariable("Titulo")String titulo,
-                       @PathVariable("Fecha") String fecha)
+                       @PathVariable("Fecha") String fecha,
+                             @PathVariable("Name") String name)
     {
         var command = new UpdatePost(PostId.of(postId),
                 IdUsuario.of(idUsuario),
                 IdTitulo.of(idTitulo),
                 new Descripcion(descripcion),
                 new Titulo(titulo),
-                new Fecha(fecha));
+                new Fecha(fecha),
+                 new Name(name));
 
         UpdatePostUseCase.Response postUpdated = executeUseCase(command);
         String string = "{"
@@ -58,7 +60,8 @@ public class PostController {
                 + "\"IdTitulo\":" + "\""+postUpdated.getResponse().getIdTitulo()+"\""+ ","
                 + "\"Descripcion\":" + "\""+postUpdated.getResponse().getDescripcion()+"\""+ ","
                 + "\"Titulo\":" + "\""+postUpdated.getResponse().getTitulo()+"\""+ ","
-                + "\"Fecha\":" + "\""+postUpdated.getResponse().getFecha()
+                + "\"Fecha\":" + "\""+postUpdated.getResponse().getFecha()+"\""+ ","
+                + "\"Fecha\":" + "\""+postUpdated.getResponse().getName()
                 +"}";
 
         return string;
@@ -72,20 +75,22 @@ public class PostController {
     }
 
     //Save
-    @PostMapping(value = "api/guardar/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Fecha}")
+    @PostMapping(value = "api/guardar/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Fecha}/{Name}")
     public String save(@PathVariable("PostId")String postId,
                        @PathVariable("IdUsuario")String idUsuario,
                        @PathVariable("IdTitulo")String idTitulo,
                        @PathVariable("Descripcion")String descripcion,
                        @PathVariable("Titulo")String titulo,
-                        @PathVariable("Fecha") String fecha)
+                        @PathVariable("Fecha") String fecha,
+                       @PathVariable("Name") String name)
     {
         var command = new CreatePost(PostId.of(postId),
                 IdUsuario.of(idUsuario),
                 IdTitulo.of(idTitulo),
                 new Descripcion(descripcion),
                 new Titulo(titulo),
-                new Fecha(fecha));
+                new Fecha(fecha),
+                new Name(name));
 
         CreatePostUseCase.Response postCreated = executeUseCase(command);
         String string = "{"
@@ -94,7 +99,8 @@ public class PostController {
                 + "\"IdTitulo\":" + "\""+postCreated.getResponse().getIdTitulo()+"\""+ ","
                 + "\"Descripcion\":" + "\""+postCreated.getResponse().getDescripcion()+"\""+ ","
                 + "\"Titulo\":" + "\""+postCreated.getResponse().getTitulo()+"\""+ ","
-                + "\"Fecha\":" + "\""+postCreated.getResponse().getFecha()
+                + "\"Fecha\":" + "\""+postCreated.getResponse().getFecha()+"\""+ ","
+                + "\"Fecha\":" + "\""+postCreated.getResponse().getName()
                 +"}";
 
         return string;
