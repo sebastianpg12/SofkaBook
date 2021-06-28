@@ -16,17 +16,17 @@ public class PostData {
     protected String fecha;
     protected String descripcion;
     protected String titulo;
-    protected String comentario;
+
 
     public PostData(String id, String idUsuario, String idTitulo, String descripcion,
-                    String titulo, String comentario, String fecha) {
+                    String titulo, String fecha) {
         this.id = id;
         this.idUsuario = idUsuario;
         this.idTitulo = idTitulo;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.titulo = titulo;
-        this.comentario = comentario;
+
     }
     public PostData() {
     }
@@ -80,11 +80,5 @@ public class PostData {
         this.titulo = titulo;
     }
 
-    public String getComentario() {
-        return comentario;
-    }
 
-    public void setComentario(String comentario) {
-        this.comentario = comentario;
-    }
 }

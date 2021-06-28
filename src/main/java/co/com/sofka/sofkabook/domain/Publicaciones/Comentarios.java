@@ -2,12 +2,17 @@ package co.com.sofka.sofkabook.domain.Publicaciones;
 
 import co.com.sofka.domain.generic.Entity;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-@Document(collation = "Post")
+@Document(collation = "comments")
 public class Comentarios extends Entity<IdComentario> {
+
+    @Id
+    protected String idProComment;
+
     protected Comentario comentario;
     protected Fecha fecha;
     protected PostId postId;
@@ -20,6 +25,7 @@ public class Comentarios extends Entity<IdComentario> {
                        IdUsuario idUsuario, Name name) {
         super(entityId);
         this.comentario=comentario;
+        this.idProComment = entityId.value();
         this.fecha=fecha;
         this.postId=postId;
         this.idUsuario=idUsuario;
@@ -27,6 +33,13 @@ public class Comentarios extends Entity<IdComentario> {
     }
 
 
+    public void setIdProComment(String idProComment) {
+        this.idProComment = idProComment;
+    }
+
+    public String getIdProComment() {
+        return idProComment;
+    }
 
     public Comentario getComentario() {
         return comentario;

@@ -4,6 +4,8 @@ import co.com.sofka.business.generic.UseCase;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.sofkabook.domain.Publicaciones.Comentarios;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateComment;
+import co.com.sofka.sofkabook.domain.Publicaciones.repository.CommentData;
+import co.com.sofka.sofkabook.domain.Publicaciones.repository.ICommentDataRepository;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.ICommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,17 +14,24 @@ import org.springframework.stereotype.Service;
 public class CreateCommentUseCase extends UseCase<RequestCommand<CreateComment>, CreateCommentUseCase.Response> {
 
     @Autowired
-    private ICommentRepository iCommentRepository;
+    private ICommentDataRepository data;
 
-   @Override
+    @Override
     public void executeUseCase(RequestCommand<CreateComment> CreateCommentRequestCommand) {
         var command = CreateCommentRequestCommand.getCommand();
         var comentarios = new Comentarios(command.IdComentario(), command.Comentario(),command.Fecha(),
                 command.PostId(),command.IdUsuario(),command.Name());
-       iCommentRepository.save(comentarios);
-        emit().onResponse(new CreateCommentUseCase.Response(comentarios));
-
+       data.save(transform(comentarios));
+        emit().onResponse(new Response(comentarios));
     }
+
+    public CommentData transform(Comentarios comentarios) {
+        CommentData commentData = new CommentData(comentarios.getIdProComment(),comentarios.getComentario().value(),
+                comentarios.getFecha().value(), comentarios.getPostId().value(), comentarios.getIdUsuario().value(),
+                comentarios.getName().value());
+        return  commentData;
+    }
+
     public static class Response implements UseCase.ResponseValues{
 
         private Comentarios response;

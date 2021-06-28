@@ -17,11 +17,11 @@ public class Post extends AggregateRoot<PostId> {
     protected Fecha fecha;
     protected Descripcion descripcion;
     protected Titulo titulo;
-    protected Comentario comentario;
+
 
 
     public Post(PostId entityId, IdUsuario idUsuario, IdTitulo idTitulo,
-                Descripcion descripcion,Titulo titulo, Comentario comentario, Fecha fecha ){
+                Descripcion descripcion,Titulo titulo, Fecha fecha ){
         super(entityId);
         this.idUsuario = idUsuario;
         this.idPro = entityId.value();
@@ -29,7 +29,7 @@ public class Post extends AggregateRoot<PostId> {
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.titulo = titulo;
-        this.comentario = comentario;
+
     }
 
     public void setIdPro(String idPro) {
@@ -58,7 +58,5 @@ public class Post extends AggregateRoot<PostId> {
 
     public Titulo getTitulo() { return titulo; }
 
-    public Comentario getComentario() {
-        return comentario;
-    }
+
 }

@@ -1,6 +1,7 @@
 package co.com.sofka.sofkabook.useCases;
 
 
+import co.com.sofka.sofkabook.domain.Publicaciones.Comentarios;
 import co.com.sofka.sofkabook.domain.Publicaciones.Post;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.IPostDataRepository;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.PostData;
@@ -16,7 +17,7 @@ public class TransformPostUseCase {
 
     public PostData transform(Post post) {
         PostData postData = new PostData(post.getIdPro(), post.getIdUsuario().value(), post.getIdTitulo().value(),
-                post.getDescripcion().value(),post.getTitulo().value(), post.getComentario().value(),post.getFecha().value());
+                post.getDescripcion().value(),post.getTitulo().value(),post.getFecha().value());
         return postData ;
     }
 

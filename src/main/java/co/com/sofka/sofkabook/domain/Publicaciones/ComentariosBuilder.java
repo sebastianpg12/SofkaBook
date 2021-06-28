@@ -3,6 +3,7 @@ package co.com.sofka.sofkabook.domain.Publicaciones;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 
 public final class ComentariosBuilder {
+    protected String idProComment;
     protected Comentario comentario;
     protected Fecha fecha;
     protected PostId postId;
@@ -14,6 +15,11 @@ public final class ComentariosBuilder {
 
     public static ComentariosBuilder aComentarios() {
         return new ComentariosBuilder();
+    }
+
+    public ComentariosBuilder withIdProComment(String idProComment) {
+        this.idProComment = idProComment;
+        return this;
     }
 
     public ComentariosBuilder withComentario(Comentario comentario) {
@@ -42,6 +48,8 @@ public final class ComentariosBuilder {
     }
 
     public Comentarios build() {
-        return new Comentarios(null, comentario, fecha, postId, idUsuario, name);
+        Comentarios comentarios = new Comentarios(null, comentario, fecha, postId, idUsuario, name);
+        comentarios.setIdProComment(idProComment);
+        return comentarios;
     }
 }

@@ -9,7 +9,6 @@ public final class PostBuilder {
     protected Fecha fecha;
     protected Descripcion descripcion;
     protected Titulo titulo;
-    protected Comentario comentario;
 
     private PostBuilder() {
     }
@@ -48,13 +47,8 @@ public final class PostBuilder {
         return this;
     }
 
-    public PostBuilder withComentario(Comentario comentario) {
-        this.comentario = comentario;
-        return this;
-    }
-
     public Post build() {
-        Post post = new Post(null, idUsuario, idTitulo, descripcion, titulo, comentario, fecha);
+        Post post = new Post(null, idUsuario, idTitulo, descripcion, titulo, fecha);
         post.setIdPro(idPro);
         return post;
     }
