@@ -6,7 +6,6 @@ import co.com.sofka.sofkabook.domain.Publicaciones.Comentarios;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateComment;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.CommentData;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.ICommentDataRepository;
-import co.com.sofka.sofkabook.domain.Publicaciones.repository.ICommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

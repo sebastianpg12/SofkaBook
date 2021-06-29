@@ -6,21 +6,23 @@ import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 public class UpdatePost implements Command {
     private final PostId postId;
     private final IdUsuario idUsuario;
-    private final IdTitulo idTitulo;
+    private final Categoria categoria;
     private final Descripcion descripcion;
     private final Titulo titulo;
     private final Fecha fecha;
     private final Name name;
 
-    public UpdatePost(PostId postId, IdUsuario idUsuario, IdTitulo idTitulo,
+
+    public UpdatePost(PostId postId, IdUsuario idUsuario, Categoria categoria,
                       Descripcion descripcion, Titulo titulo,  Fecha fecha, Name name) {
         this.postId = postId;
         this.idUsuario = idUsuario;
-        this.idTitulo = idTitulo;
+        this.categoria = categoria;
         this.descripcion = descripcion;
         this.titulo = titulo;
         this.fecha = fecha;
         this.name = name;
+
     }
 
     public PostId PostId() {
@@ -31,8 +33,8 @@ public class UpdatePost implements Command {
         return idUsuario;
     }
 
-    public IdTitulo IdTitulo() {
-        return idTitulo;
+    public Categoria Categoria() {
+        return categoria;
     }
 
     public Descripcion Descripcion() {
@@ -50,4 +52,6 @@ public class UpdatePost implements Command {
     public Name Name() {
         return name;
     }
+
+
 }

@@ -3,6 +3,7 @@ package co.com.sofka.sofkabook.useCases;
 
 import co.com.sofka.sofkabook.domain.Publicaciones.Comentarios;
 import co.com.sofka.sofkabook.domain.Publicaciones.Post;
+import co.com.sofka.sofkabook.domain.Publicaciones.repository.CommentData;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.IPostDataRepository;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.PostData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,14 @@ public class TransformPostUseCase {
     @Autowired
     private IPostDataRepository data;
 
-
     public PostData transform(Post post) {
-        PostData postData = new PostData(post.getIdPro(), post.getIdUsuario().value(), post.getIdTitulo().value(),
+        PostData postData = new PostData(post.getIdPro(), post.getIdUsuario().value(), post.getCategoria().value(),
                 post.getDescripcion().value(),post.getTitulo().value(),post.getFecha().value(),post.getName().value());
         return postData ;
+    }
+
+    public Iterable<PostData> listarCategoria(String categoria) {
+       return data.findByCategoria(categoria);
     }
 
     public Iterable<PostData> listar(){

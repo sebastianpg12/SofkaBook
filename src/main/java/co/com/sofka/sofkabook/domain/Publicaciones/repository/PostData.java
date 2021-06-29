@@ -12,22 +12,23 @@ public class PostData {
     protected String id;
 
     protected String idUsuario;
-    protected String idTitulo;
+    protected String categoria;
     protected String fecha;
     protected String descripcion;
     protected String titulo;
     protected String name;
 
 
-    public PostData(String id, String idUsuario, String idTitulo, String descripcion,
+    public PostData(String id, String idUsuario, String categoria, String descripcion,
                     String titulo, String fecha, String name) {
         this.id = id;
         this.idUsuario = idUsuario;
-        this.idTitulo = idTitulo;
+        this.categoria = categoria;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.titulo = titulo;
         this.name = name;
+
 
     }
     public PostData() {
@@ -50,12 +51,12 @@ public class PostData {
         this.idUsuario = idUsuario;
     }
 
-    public String getIdTitulo() {
-        return idTitulo;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setIdTitulo(String idTitulo) {
-        this.idTitulo = idTitulo;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     public String getFecha() {
@@ -89,4 +90,6 @@ public class PostData {
     public void setName(String name) {
         this.name = name;
     }
+
+
 }

@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IPostDataRepository extends CrudRepository<PostData, String> {
+    Iterable<PostData> findByCategoria(String categoria);
 }

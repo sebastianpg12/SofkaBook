@@ -2,7 +2,6 @@ package co.com.sofka.sofkabook.domain.Controller;
 
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
-import co.com.sofka.sofkabook.domain.Publicaciones.Comentarios;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateComment;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreatePost;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.UpdatePost;
@@ -12,8 +11,6 @@ import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 import co.com.sofka.sofkabook.useCases.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -28,6 +25,7 @@ public class PostController {
     @Autowired
     private TransformPostUseCase transformPostUseCase;
 
+
     @Autowired
     private TransformCommentUseCase transformCommentUseCase;
 
@@ -35,11 +33,12 @@ public class PostController {
     private UpdatePostUseCase updatePostUseCase;
 
 
+
     //actualizar
-    @PutMapping(value = "api/actualizar/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Fecha}/{Name}")
+    @PutMapping(value = "api/actualizar/{PostId}/{IdUsuario}/{Categoria}/{Descripcion}/{Titulo}/{Fecha}/{Name}")
     public String actualizar(@PathVariable("PostId")String postId,
                        @PathVariable("IdUsuario")String idUsuario,
-                       @PathVariable("IdTitulo")String idTitulo,
+                       @PathVariable("Categoria")String categoria,
                        @PathVariable("Descripcion")String descripcion,
                        @PathVariable("Titulo")String titulo,
                        @PathVariable("Fecha") String fecha,
@@ -47,7 +46,7 @@ public class PostController {
     {
         var command = new UpdatePost(PostId.of(postId),
                 IdUsuario.of(idUsuario),
-                IdTitulo.of(idTitulo),
+                new Categoria(categoria),
                 new Descripcion(descripcion),
                 new Titulo(titulo),
                 new Fecha(fecha),
@@ -57,11 +56,11 @@ public class PostController {
         String string = "{"
                 + "\"PostId\":" + "\""+postUpdated.getResponse().identity()+"\""+ ","
                 + "\"IdUsuario\":" + "\""+postUpdated.getResponse().getIdUsuario()+"\""+ ","
-                + "\"IdTitulo\":" + "\""+postUpdated.getResponse().getIdTitulo()+"\""+ ","
+                + "\"Categoria\":" + "\""+postUpdated.getResponse().getCategoria()+"\""+ ","
                 + "\"Descripcion\":" + "\""+postUpdated.getResponse().getDescripcion()+"\""+ ","
                 + "\"Titulo\":" + "\""+postUpdated.getResponse().getTitulo()+"\""+ ","
                 + "\"Fecha\":" + "\""+postUpdated.getResponse().getFecha()+"\""+ ","
-                + "\"Fecha\":" + "\""+postUpdated.getResponse().getName()
+                + "\"Name\":" + "\""+postUpdated.getResponse().getName()
                 +"}";
 
         return string;
@@ -75,18 +74,18 @@ public class PostController {
     }
 
     //Save
-    @PostMapping(value = "api/guardar/{PostId}/{IdUsuario}/{IdTitulo}/{Descripcion}/{Titulo}/{Fecha}/{Name}")
+    @PostMapping(value = "api/guardar/{PostId}/{IdUsuario}/{Categoria}/{Descripcion}/{Titulo}/{Fecha}/{Name}")
     public String save(@PathVariable("PostId")String postId,
-                       @PathVariable("IdUsuario")String idUsuario,
-                       @PathVariable("IdTitulo")String idTitulo,
-                       @PathVariable("Descripcion")String descripcion,
-                       @PathVariable("Titulo")String titulo,
-                        @PathVariable("Fecha") String fecha,
-                       @PathVariable("Name") String name)
+                             @PathVariable("IdUsuario")String idUsuario,
+                             @PathVariable("Categoria")String categoria,
+                             @PathVariable("Descripcion")String descripcion,
+                             @PathVariable("Titulo")String titulo,
+                             @PathVariable("Fecha") String fecha,
+                             @PathVariable("Name") String name)
     {
         var command = new CreatePost(PostId.of(postId),
                 IdUsuario.of(idUsuario),
-                IdTitulo.of(idTitulo),
+                new Categoria(categoria),
                 new Descripcion(descripcion),
                 new Titulo(titulo),
                 new Fecha(fecha),
@@ -96,11 +95,11 @@ public class PostController {
         String string = "{"
                 + "\"PostId\":" + "\""+postCreated.getResponse().identity()+"\""+ ","
                 + "\"IdUsuario\":" + "\""+postCreated.getResponse().getIdUsuario()+"\""+ ","
-                + "\"IdTitulo\":" + "\""+postCreated.getResponse().getIdTitulo()+"\""+ ","
+                + "\"Categoria\":" + "\""+postCreated.getResponse().getCategoria()+"\""+ ","
                 + "\"Descripcion\":" + "\""+postCreated.getResponse().getDescripcion()+"\""+ ","
                 + "\"Titulo\":" + "\""+postCreated.getResponse().getTitulo()+"\""+ ","
                 + "\"Fecha\":" + "\""+postCreated.getResponse().getFecha()+"\""+ ","
-                + "\"Fecha\":" + "\""+postCreated.getResponse().getName()
+                + "\"Name\":" + "\""+postCreated.getResponse().getName()
                 +"}";
 
         return string;
@@ -113,7 +112,6 @@ public class PostController {
         var PostCreated = events;
         return PostCreated;
     }
-
 
 
     @PostMapping(value = "apiComment/{IdComentario}/{Comentario}/{Fecha}/{PostId}/{IdUsuario}/{Name}")
@@ -152,6 +150,8 @@ public class PostController {
         return CommentCreated;
     }
 
+
+
     @DeleteMapping(value = "apiComment/delete/{id}")
     public String deleteComment(@PathVariable("id") String id){
         return (transformCommentUseCase.delete(id));
@@ -162,6 +162,10 @@ public class PostController {
         return (transformCommentUseCase.listComment(postId));
     }
 
+   @GetMapping(value = "api/findByCategory/{categoria}")
+    public Iterable<PostData> listarCategoria(@PathVariable("categoria") String categoria){
+        return (transformPostUseCase.listarCategoria(categoria));
+    }
 
     @GetMapping(value = "api/findPosts")
     public Iterable<PostData> listar(){

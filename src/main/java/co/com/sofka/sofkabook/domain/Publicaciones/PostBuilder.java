@@ -5,7 +5,7 @@ import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 public final class PostBuilder {
     protected String idPro;
     protected IdUsuario idUsuario;
-    protected IdTitulo idTitulo;
+    protected Categoria categoria;
     protected Fecha fecha;
     protected Descripcion descripcion;
     protected Titulo titulo;
@@ -28,8 +28,8 @@ public final class PostBuilder {
         return this;
     }
 
-    public PostBuilder withIdTitulo(IdTitulo idTitulo) {
-        this.idTitulo = idTitulo;
+    public PostBuilder withCategoria(Categoria categoria) {
+        this.categoria = categoria;
         return this;
     }
 
@@ -54,7 +54,7 @@ public final class PostBuilder {
     }
 
     public Post build() {
-        Post post = new Post(null, idUsuario, idTitulo, descripcion, titulo, fecha, name);
+        Post post = new Post(null, idUsuario, categoria, descripcion, titulo, fecha, name);
         post.setIdPro(idPro);
         return post;
     }

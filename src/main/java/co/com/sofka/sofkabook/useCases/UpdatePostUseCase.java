@@ -20,7 +20,7 @@ public class UpdatePostUseCase extends UseCase<RequestCommand<UpdatePost>, UseCa
     @Override
     public void executeUseCase(RequestCommand<UpdatePost> updatePostRequestCommand) {
             var command = updatePostRequestCommand.getCommand();
-            var post = new Post(command.PostId(), command.IdUsuario(), command.IdTitulo(),
+            var post = new Post(command.PostId(), command.IdUsuario(), command.Categoria(),
                     command.Descripcion(), command.Titulo(), command.Fecha(),command.Name());
             data.save(transform(post));
             emit().onResponse(new Response(post));
@@ -28,7 +28,7 @@ public class UpdatePostUseCase extends UseCase<RequestCommand<UpdatePost>, UseCa
 
 
     public PostData transform(Post post) {
-        PostData postData = new PostData(post.getIdPro(), post.getIdUsuario().value(), post.getIdTitulo().value(),
+        PostData postData = new PostData(post.getIdPro(), post.getIdUsuario().value(), post.getCategoria().value(),
                 post.getDescripcion().value(),post.getTitulo().value(),post.getFecha().value(),post.getName().value());
         return postData ;
     }

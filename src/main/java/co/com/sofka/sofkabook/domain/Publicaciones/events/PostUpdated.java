@@ -6,20 +6,23 @@ import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 public class PostUpdated extends DomainEvent {
     private final PostId postId;
     private final IdUsuario idUsuario;
-    private final IdTitulo idTitulo;
+    private final Categoria categoria;
     private final Fecha fecha;
     private final Descripcion descripcion;
     private final Titulo titulo;
 
 
-    public PostUpdated(PostId postId, IdUsuario idUsuario, IdTitulo idTitulo, Fecha fecha, Descripcion descripcion, Titulo titulo) {
+
+    public PostUpdated(PostId postId, IdUsuario idUsuario, Categoria categoria, Fecha fecha, Descripcion descripcion,
+                       Titulo titulo) {
         super("Posts.post.created");
         this.postId = postId;
         this.idUsuario = idUsuario;
-        this.idTitulo = idTitulo;
+        this.categoria = categoria;
         this.fecha = fecha;
         this.descripcion = descripcion;
         this.titulo = titulo;
+
     }
 
     public PostId PostId() {
@@ -30,8 +33,8 @@ public class PostUpdated extends DomainEvent {
         return idUsuario;
     }
 
-    public IdTitulo IdTitulo() {
-        return idTitulo;
+    public Categoria IdTitulo() {
+        return categoria;
     }
 
     public Fecha Fecha() {
@@ -45,4 +48,5 @@ public class PostUpdated extends DomainEvent {
     public Titulo Titulo() {
         return titulo;
     }
+
 }
