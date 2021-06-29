@@ -5,7 +5,6 @@ import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.List;
 
 @Document(collation = "comments")
 public class Comentarios extends Entity<IdComentario> {
