@@ -1,19 +1,25 @@
 package co.com.sofka.sofkabook.domain.Publicaciones;
 
 import co.com.sofka.sofkabook.domain.Publicaciones.values.Email;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Image;
+import co.com.sofka.sofkabook.domain.Publicaciones.values.Fecha;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.Name;
 
 public final class PersonBuilder {
+    protected String idPro;
     protected Email email;
     protected Name name;
-    protected Image image;
+    protected Fecha fecha;
 
     private PersonBuilder() {
     }
 
     public static PersonBuilder aPerson() {
         return new PersonBuilder();
+    }
+
+    public PersonBuilder withIdPro(String idPro) {
+        this.idPro = idPro;
+        return this;
     }
 
     public PersonBuilder withEmail(Email email) {
@@ -26,12 +32,14 @@ public final class PersonBuilder {
         return this;
     }
 
-    public PersonBuilder withImage(Image image) {
-        this.image = image;
+    public PersonBuilder withFecha(Fecha fecha) {
+        this.fecha = fecha;
         return this;
     }
 
     public Person build() {
-        return new Person(null, email, name, image);
+        Person person = new Person(null, email, name, fecha);
+        person.setIdPro(idPro);
+        return person;
     }
 }

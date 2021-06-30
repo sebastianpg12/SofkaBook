@@ -2,30 +2,35 @@ package co.com.sofka.sofkabook.domain.Publicaciones;
 
 
 import co.com.sofka.domain.generic.Entity;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Email;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.IdUsuario;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Image;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Name;
+import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collation = "Person")
+@Document(collection = "person")
 public class Person extends Entity<IdUsuario> {
+
+    @Id
+    protected String idPro;
 
     protected Email email;
     protected Name name;
-    protected Image image;
+    protected Fecha fecha;
 
-    public Person(IdUsuario entityId, Email email, Name name, Image image) {
+    public Person(IdUsuario entityId, Email email, Name name, Fecha fecha) {
         super(entityId);
+        this.idPro = entityId.value();
         this.email = email;
         this.name = name;
-        this.image = image;
+        this.fecha = fecha;
     }
 
-    public Person(IdUsuario entityId) {
-        super(entityId);
+    public void setIdPro(String idPro) {
+        this.idPro = idPro;
     }
 
+    public String getIdPro() {
+        return idPro;
+    }
 
     public Email getEmail() {
         return email;
@@ -35,7 +40,7 @@ public class Person extends Entity<IdUsuario> {
         return name;
     }
 
-    public Image getImage() {
-        return image;
+    public Fecha getFecha() {
+        return fecha;
     }
 }

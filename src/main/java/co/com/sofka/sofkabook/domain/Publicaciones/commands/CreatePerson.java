@@ -1,39 +1,34 @@
 package co.com.sofka.sofkabook.domain.Publicaciones.commands;
 
 import co.com.sofka.domain.generic.Command;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Email;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.IdUsuario;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Image;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Name;
+import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 
 public class CreatePerson implements Command {
     private final IdUsuario idUsuario;
     private final Email email;
     private final Name name;
-    private final Image image;
+    private final Fecha fecha;
 
-    public CreatePerson(IdUsuario idUsuario, Email email, Name name, Image image) {
+    public CreatePerson(IdUsuario idUsuario, Email email, Name name, Fecha fecha) {
         this.idUsuario = idUsuario;
         this.email = email;
         this.name = name;
-        this.image = image;
+        this.fecha = fecha;
     }
 
-    public IdUsuario IdUsuario() {
+    public IdUsuario getIdUsuario() {
         return idUsuario;
     }
 
-    public Email Email() {
+    public Email getEmail() {
         return email;
     }
 
-    public Name Name() {
+    public Name getName() {
         return name;
     }
 
-    public Image Image() {
-        return image;
+    public Fecha getFecha() {
+        return fecha;
     }
-
-
 }
