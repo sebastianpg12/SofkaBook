@@ -29,7 +29,7 @@ public class PersonController {
                              @PathVariable("Email")String email,
                              @PathVariable("Name")String name,
                              @PathVariable("Fecha")String fecha){
-        var command = new CreatePerson(IdUsuario.of(idUsuario), new Email(email), new Name(name), new Fecha(fecha));
+        CreatePerson command = new CreatePerson(IdUsuario.of(idUsuario), new Email(email), new Name(name), new Fecha(fecha));
 
         CreatePersonUseCase.Response personCreated = executeUseCase(command);
 
@@ -43,10 +43,10 @@ public class PersonController {
     }
 
     private CreatePersonUseCase.Response executeUseCase(CreatePerson command) {
-        var events = UseCaseHandler.getInstance()
+        CreatePersonUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(createPersonUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var PersonCreated = events;
+        CreatePersonUseCase.Response PersonCreated = events;
         return PersonCreated;
     }
 

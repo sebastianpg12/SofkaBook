@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class UpdatePostUseCase extends UseCase<RequestCommand<UpdatePost>, UseCase.ResponseValues> {
+public class UpdatePostUseCase extends UseCase<RequestCommand<UpdatePost>, UpdatePostUseCase.Response> {
 
     @Autowired
     private IPostDataRepository data;
@@ -19,8 +19,8 @@ public class UpdatePostUseCase extends UseCase<RequestCommand<UpdatePost>, UseCa
 
     @Override
     public void executeUseCase(RequestCommand<UpdatePost> updatePostRequestCommand) {
-            var command = updatePostRequestCommand.getCommand();
-            var post = new Post(command.PostId(), command.IdUsuario(), command.Categoria(),
+            UpdatePost command = updatePostRequestCommand.getCommand();
+            Post post = new Post(command.PostId(), command.IdUsuario(), command.Categoria(),
                     command.Descripcion(), command.Titulo(), command.Fecha(),command.Name());
             data.save(transform(post));
             emit().onResponse(new Response(post));

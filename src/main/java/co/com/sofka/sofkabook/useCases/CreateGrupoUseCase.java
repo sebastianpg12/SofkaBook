@@ -18,8 +18,8 @@ public class CreateGrupoUseCase extends UseCase<RequestCommand<CreateGrupo>, Cre
 
     @Override
     public void executeUseCase(RequestCommand<CreateGrupo> createGrupoRequestCommand) {
-        var command = createGrupoRequestCommand.getCommand();
-        var grupo = new Grupo(command.IdGrupo(),command.Titulo(),command.Fecha(),command.Name());
+        CreateGrupo command = createGrupoRequestCommand.getCommand();
+        Grupo grupo = new Grupo(command.IdGrupo(),command.Titulo(),command.Fecha(),command.Name());
         data.save(transform(grupo));
         emit().onResponse(new Response(grupo));
     }

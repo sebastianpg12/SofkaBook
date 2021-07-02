@@ -17,8 +17,8 @@ public class CreateCommentUseCase extends UseCase<RequestCommand<CreateComment>,
 
     @Override
     public void executeUseCase(RequestCommand<CreateComment> CreateCommentRequestCommand) {
-        var command = CreateCommentRequestCommand.getCommand();
-        var comentarios = new Comentarios(command.IdComentario(), command.Comentario(),command.Fecha(),
+        CreateComment command = CreateCommentRequestCommand.getCommand();
+        Comentarios comentarios = new Comentarios(command.IdComentario(), command.Comentario(),command.Fecha(),
                 command.PostId(),command.IdUsuario(),command.Name());
        data.save(transform(comentarios));
         emit().onResponse(new Response(comentarios));

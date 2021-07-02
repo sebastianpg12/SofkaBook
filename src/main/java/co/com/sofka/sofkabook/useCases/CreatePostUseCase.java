@@ -18,8 +18,8 @@ public class CreatePostUseCase extends UseCase<RequestCommand<CreatePost>, Creat
 
     @Override
     public void executeUseCase(RequestCommand<CreatePost> createPostRequestCommand) {
-        var command = createPostRequestCommand.getCommand();
-        var post = new Post(command.PostId(), command.IdUsuario(), command.Categoria(),
+        CreatePost command = createPostRequestCommand.getCommand();
+        Post post = new Post(command.PostId(), command.IdUsuario(), command.Categoria(),
                 command.Descripcion(), command.Titulo(), command.Fecha(), command.Name());
         data.save(transform(post));
         emit().onResponse(new Response(post));

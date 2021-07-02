@@ -36,7 +36,7 @@ public class GrupoController {
                             @PathVariable("Titulo")String titulo,
                             @PathVariable("Fecha")String fecha,
                             @PathVariable("Name")String name){
-        var command = new CreateGrupo(IdGrupo.of(idGrupo), new Titulo(titulo), new Fecha(fecha),
+        CreateGrupo command = new CreateGrupo(IdGrupo.of(idGrupo), new Titulo(titulo), new Fecha(fecha),
                 new Name(name));
 
         CreateGrupoUseCase.Response grupoCreated = executeUseCase(command);
@@ -57,7 +57,7 @@ public class GrupoController {
                               @PathVariable("Name") String name,
                               @PathVariable("IdGrupo") String idGrupo
                               ){
-        var command = new CreateMensaje(IdMensajes.of(idMensajes),
+        CreateMensaje command = new CreateMensaje(IdMensajes.of(idMensajes),
                 new Titulo(titulo), new Fecha(fecha), new Name(name), IdGrupo.of(idGrupo));
 
         CreateMensajeUseCase.Response mensajeCreated = executeUseCase(command);
@@ -74,18 +74,18 @@ public class GrupoController {
     }
 
     private CreateGrupoUseCase.Response executeUseCase(CreateGrupo command) {
-        var events = UseCaseHandler.getInstance()
+        CreateGrupoUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(createGrupoUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var GrupoCreated = events;
+        CreateGrupoUseCase.Response GrupoCreated = events;
         return GrupoCreated;
     }
 
     private CreateMensajeUseCase.Response executeUseCase(CreateMensaje command) {
-        var events = UseCaseHandler.getInstance()
+        CreateMensajeUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(createMensajeUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var MensajeCreated = events;
+        CreateMensajeUseCase.Response MensajeCreated = events;
         return MensajeCreated;
     }
 
@@ -104,14 +104,11 @@ public class GrupoController {
     public String deleteGrupo(@PathVariable("id") String id) {
         return (transformGrupoUseCase.delete(id));
 
-
     }
-
 
     @DeleteMapping(value = "apiMensajes/deleteMensaje/{id}")
     public String deleteMensaje(@PathVariable("id") String id) {
         return (transformMensajesUseCase.deleteMensaje(id));
-
 
     }
 }

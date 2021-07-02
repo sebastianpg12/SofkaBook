@@ -19,8 +19,8 @@ public class CreateMensajeUseCase extends UseCase<RequestCommand<CreateMensaje>,
 
     @Override
     public void executeUseCase(RequestCommand<CreateMensaje> createMensajeRequestCommand) {
-        var command = createMensajeRequestCommand.getCommand();
-        var mensajes = new Mensajes(command.IdMensajes(),command.Titulo(),command.Fecha(),
+        CreateMensaje command = createMensajeRequestCommand.getCommand();
+        Mensajes mensajes = new Mensajes(command.IdMensajes(),command.Titulo(),command.Fecha(),
                 command.Name(), command.IdGrupo());
         data.save(transform(mensajes));
         emit().onResponse(new Response(mensajes));

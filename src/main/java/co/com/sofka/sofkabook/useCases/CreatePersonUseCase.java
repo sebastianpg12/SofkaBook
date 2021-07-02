@@ -19,8 +19,8 @@ public class CreatePersonUseCase extends UseCase<RequestCommand<CreatePerson>, C
 
     @Override
     public void executeUseCase(RequestCommand<CreatePerson> createPersonRequestCommand) {
-        var command = createPersonRequestCommand.getCommand();
-        var person = new Person(command.getIdUsuario(),command.getEmail(), command.getName(), command.getFecha());
+        CreatePerson command = createPersonRequestCommand.getCommand();
+        Person person = new Person(command.getIdUsuario(),command.getEmail(), command.getName(), command.getFecha());
         data.save(transform(person));
         emit().onResponse(new Response(person));
 

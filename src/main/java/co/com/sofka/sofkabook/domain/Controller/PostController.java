@@ -44,7 +44,7 @@ public class PostController {
                        @PathVariable("Fecha") String fecha,
                              @PathVariable("Name") String name)
     {
-        var command = new UpdatePost(PostId.of(postId),
+        UpdatePost command = new UpdatePost(PostId.of(postId),
                 IdUsuario.of(idUsuario),
                 new Categoria(categoria),
                 new Descripcion(descripcion),
@@ -66,11 +66,11 @@ public class PostController {
         return string;
     }
     private UpdatePostUseCase.Response executeUseCase(UpdatePost command) {
-        var events = UseCaseHandler.getInstance()
+        UpdatePostUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(updatePostUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var PostUpdated = events;
-        return (UpdatePostUseCase.Response) PostUpdated;
+        UpdatePostUseCase.Response PostUpdated = events;
+        return PostUpdated;
     }
 
     //Save
@@ -83,7 +83,7 @@ public class PostController {
                              @PathVariable("Fecha") String fecha,
                              @PathVariable("Name") String name)
     {
-        var command = new CreatePost(PostId.of(postId),
+        CreatePost command = new CreatePost(PostId.of(postId),
                 IdUsuario.of(idUsuario),
                 new Categoria(categoria),
                 new Descripcion(descripcion),
@@ -106,10 +106,10 @@ public class PostController {
     }
 
     private CreatePostUseCase.Response executeUseCase(CreatePost command) {
-        var events = UseCaseHandler.getInstance()
+        CreatePostUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(createPostUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var PostCreated = events;
+        CreatePostUseCase.Response PostCreated = events;
         return PostCreated;
     }
 
@@ -123,7 +123,7 @@ public class PostController {
                               @PathVariable("Name") String name)
 
     {
-        var command = new CreateComment(IdComentario.of(idComentario),
+        CreateComment command = new CreateComment(IdComentario.of(idComentario),
                 new Comentario(comentario), new Fecha(fecha), PostId.of(postId)
                         ,IdUsuario.of(idUsuario), new Name(name));
 
@@ -144,10 +144,10 @@ public class PostController {
 
 
     private CreateCommentUseCase.Response executeUseCase(CreateComment command) {
-        var events = UseCaseHandler.getInstance()
+        CreateCommentUseCase.Response events = UseCaseHandler.getInstance()
                 .syncExecutor(createCommentUseCase, new RequestCommand<>(command))
                 .orElseThrow();
-        var CommentCreated = events;
+        CreateCommentUseCase.Response CommentCreated = events;
         return CommentCreated;
     }
 
