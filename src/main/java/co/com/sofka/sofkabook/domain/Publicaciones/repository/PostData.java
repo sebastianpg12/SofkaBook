@@ -34,7 +34,6 @@ public class PostData {
     public PostData() {
     }
 
-
     public String getId() {
         return id;
     }

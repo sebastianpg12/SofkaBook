@@ -20,8 +20,6 @@ public class Post extends AggregateRoot<PostId> {
     protected Name name;
 
 
-
-
     public Post(PostId entityId, IdUsuario idUsuario, Categoria categoria,
                 Descripcion descripcion,Titulo titulo, Fecha fecha, Name name){
         super(entityId);
@@ -32,7 +30,6 @@ public class Post extends AggregateRoot<PostId> {
         this.descripcion = descripcion;
         this.titulo = titulo;
         this.name = name;
-
 
     }
 

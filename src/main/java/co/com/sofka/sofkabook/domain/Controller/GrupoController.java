@@ -7,7 +7,6 @@ import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateGrupo;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateMensaje;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.GrupoData;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.MensajesData;
-import co.com.sofka.sofkabook.domain.Publicaciones.repository.PostData;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 import co.com.sofka.sofkabook.useCases.CreateGrupoUseCase;
 import co.com.sofka.sofkabook.useCases.CreateMensajeUseCase;
