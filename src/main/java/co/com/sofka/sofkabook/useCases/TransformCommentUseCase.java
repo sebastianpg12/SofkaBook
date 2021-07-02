@@ -19,9 +19,9 @@ public class TransformCommentUseCase {
                 comentarios.getName().value());
         return  commentData;
     }
-    public Iterable<CommentData> listComment(String postId) {
-        return data.findByPostId(postId);
-    }
+        public Iterable<CommentData> listComment(String postId) {
+            return data.findByPostId(postId);
+        }
 
     public String delete(String id) {
 

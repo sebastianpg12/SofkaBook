@@ -1,9 +1,7 @@
 package co.com.sofka.sofkabook.useCases;
 
 
-import co.com.sofka.sofkabook.domain.Publicaciones.Comentarios;
 import co.com.sofka.sofkabook.domain.Publicaciones.Post;
-import co.com.sofka.sofkabook.domain.Publicaciones.repository.CommentData;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.IPostDataRepository;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.PostData;
 import org.springframework.beans.factory.annotation.Autowired;

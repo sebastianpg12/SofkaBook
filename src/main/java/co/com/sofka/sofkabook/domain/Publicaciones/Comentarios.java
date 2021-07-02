@@ -6,7 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document(collation = "comments")
+@Document(collection = "comments")
 public class Comentarios extends Entity<IdComentario> {
 
     @Id
