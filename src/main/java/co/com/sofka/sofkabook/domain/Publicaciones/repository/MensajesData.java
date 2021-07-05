@@ -1,8 +1,6 @@
 package co.com.sofka.sofkabook.domain.Publicaciones.repository;
 
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Fecha;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Name;
-import co.com.sofka.sofkabook.domain.Publicaciones.values.Titulo;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 

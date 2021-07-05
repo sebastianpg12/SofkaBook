@@ -23,6 +23,12 @@ public class TransformPostUseCase {
        return data.findByCategoria(categoria);
     }
 
+
+    public Iterable<PostData> listarIdUsuario(String idUsuario) {
+        return data.findByIdUsuario(idUsuario);
+    }
+
+
     public Iterable<PostData> listar(){
         return data.findAll();
     }

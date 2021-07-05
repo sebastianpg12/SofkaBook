@@ -3,9 +3,11 @@ package co.com.sofka.sofkabook.domain.Controller;
 import co.com.sofka.business.generic.UseCaseHandler;
 import co.com.sofka.business.support.RequestCommand;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateComment;
+import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreateLike;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.CreatePost;
 import co.com.sofka.sofkabook.domain.Publicaciones.commands.UpdatePost;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.CommentData;
+import co.com.sofka.sofkabook.domain.Publicaciones.repository.LikeData;
 import co.com.sofka.sofkabook.domain.Publicaciones.repository.PostData;
 import co.com.sofka.sofkabook.domain.Publicaciones.values.*;
 import co.com.sofka.sofkabook.useCases.*;
@@ -30,7 +32,14 @@ public class PostController {
     private TransformCommentUseCase transformCommentUseCase;
 
     @Autowired
+    private CreateLikeUseCase createLikeUseCase;
+
+    @Autowired
+    private TransformLikeUseCase transformLikeUseCase;
+
+    @Autowired
     private UpdatePostUseCase updatePostUseCase;
+
 
 
 
@@ -141,6 +150,33 @@ public class PostController {
         return string;
     }
 
+    @PostMapping(value = "apiLike/{IdLike}/{IdUsuario}/{PostId}")
+    public String saveLike(@PathVariable("IdLike")String idLike,
+                              @PathVariable("IdUsuario") String idUsuario,
+                              @PathVariable("PostId") String postId)
+    {
+
+        CreateLike command = new CreateLike(IdLike.of(idLike),
+                IdUsuario.of(idUsuario), PostId.of(postId));
+
+        CreateLikeUseCase.Response LikeCreated = executeUseCase(command);
+        String string = "{"
+                + "\"IdLike\":" + "\""+LikeCreated.getResponse().identity()+"\""+ ","
+                + "\"PostId\":" + "\""+LikeCreated.getResponse().getPostId()+"\""+ ","
+                + "\"IdUsuario\":" + "\""+LikeCreated.getResponse().getIdUsuario()
+                +"}";
+
+        return string;
+    }
+
+    private CreateLikeUseCase.Response executeUseCase(CreateLike command) {
+        CreateLikeUseCase.Response events = UseCaseHandler.getInstance()
+                .syncExecutor(createLikeUseCase, new RequestCommand<>(command))
+                .orElseThrow();
+        CreateLikeUseCase.Response LikeCreated = events;
+        return LikeCreated;
+    }
+
 
 
     private CreateCommentUseCase.Response executeUseCase(CreateComment command) {
@@ -167,6 +203,17 @@ public class PostController {
     public Iterable<PostData> listarCategoria(@PathVariable("categoria") String categoria){
         return (transformPostUseCase.listarCategoria(categoria));
     }
+
+    @GetMapping(value = "api/findByIdUsuario/{idUsuario}")
+    public Iterable<PostData> listarIdUsuario(@PathVariable("idUsuario") String idUsuario){
+        return (transformPostUseCase.listarIdUsuario(idUsuario));
+    }
+
+    @GetMapping(value = "apiLike/findByPostId/{postId}")
+    public Iterable<LikeData> listarLike(@PathVariable("postId") String postId){
+        return (transformLikeUseCase.listarLike(postId));
+    }
+
 
     @GetMapping(value = "api/findPosts")
     public Iterable<PostData> listar(){

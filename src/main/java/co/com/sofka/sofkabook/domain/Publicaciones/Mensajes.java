@@ -25,6 +25,7 @@ public class Mensajes extends Entity<IdMensajes> {
         this.idGrupo = idGrupo;
     }
 
+
     public void setIdPro(String idPro) {
         this.idPro = idPro;
     }
