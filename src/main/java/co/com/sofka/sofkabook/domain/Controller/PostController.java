@@ -103,12 +103,12 @@ public class PostController {
         CreatePostUseCase.Response postCreated = executeUseCase(command);
         String string = "{"
                 + "\"PostId\":" + "\""+postCreated.getResponse().identity()+"\""+ ","
-                + "\"IdUsuario\":" + "\""+postCreated.getResponse().getIdUsuario()+"\""+ ","
-                + "\"Categoria\":" + "\""+postCreated.getResponse().getCategoria()+"\""+ ","
-                + "\"Descripcion\":" + "\""+postCreated.getResponse().getDescripcion()+"\""+ ","
-                + "\"Titulo\":" + "\""+postCreated.getResponse().getTitulo()+"\""+ ","
-                + "\"Fecha\":" + "\""+postCreated.getResponse().getFecha()+"\""+ ","
-                + "\"Name\":" + "\""+postCreated.getResponse().getName()
+                + "\"IdUsuario\":" + "\""+postCreated.getResponse().getIdUsuario().value()+"\""+ ","
+                + "\"Categoria\":" + "\""+postCreated.getResponse().getCategoria().value()+"\""+ ","
+                + "\"Descripcion\":" + "\""+postCreated.getResponse().getDescripcion().value()+"\""+ ","
+                + "\"Titulo\":" + "\""+postCreated.getResponse().getTitulo().value()+"\""+ ","
+                + "\"Fecha\":" + "\""+postCreated.getResponse().getFecha().value()+"\""+ ","
+                + "\"Name\":" + "\""+postCreated.getResponse().getName().value()
                 +"}";
 
         return string;

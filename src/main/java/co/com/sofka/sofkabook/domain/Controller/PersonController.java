@@ -34,10 +34,10 @@ public class PersonController {
         CreatePersonUseCase.Response personCreated = executeUseCase(command);
 
         String string = "{"
-                + "\"IdUsuario\":" + "\""+personCreated.getResponse().identity()+"\""+ ","
-                + "\"Email\":" + "\""+personCreated.getResponse().getEmail()+"\""+ ","
-                + "\"Name\":" + "\""+personCreated.getResponse().getName()+"\""+ ","
-                + "\"Fecha\":" + "\""+personCreated.getResponse().getFecha()
+                + "\"idUsuario\":" + "\""+personCreated.getResponse().identity().value()+"\""+ ","
+                + "\"email\":" + "\""+personCreated.getResponse().getEmail().value()+"\""+ ","
+                + "\"name\":" + "\""+personCreated.getResponse().getName().value()+"\""+ ","
+                + "\"fecha\":" + "\""+personCreated.getResponse().getFecha().value()
                 +"}";
         return string;
     }

@@ -43,9 +43,9 @@ public class GrupoController {
 
         String string = "{"
                 + "\"IdGrupo\":" + "\""+grupoCreated.getResponse().identity()+"\""+ ","
-                + "\"Titulo\":" + "\""+grupoCreated.getResponse().getTitulo()+"\""+ ","
-                + "\"Fecha\":" + "\""+grupoCreated.getResponse().getFecha()+"\""+ ","
-                + "\"Name\":" + "\""+grupoCreated.getResponse().getName()
+                + "\"Titulo\":" + "\""+grupoCreated.getResponse().getTitulo().value()+"\""+ ","
+                + "\"Fecha\":" + "\""+grupoCreated.getResponse().getFecha().value()+"\""+ ","
+                + "\"Name\":" + "\""+grupoCreated.getResponse().getName().value()
                 +"}";
         return string;
     }
